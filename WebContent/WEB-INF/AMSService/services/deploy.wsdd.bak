@@ -1,0 +1,193 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from AMSService WSDL service -->
+
+  <service name="AMS" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://services"/>
+      <parameter name="wsdlServiceElement" value="AMSService"/>
+      <parameter name="schemaQualified" value="http://services,http://beans"/>
+      <parameter name="wsdlServicePort" value="AMS"/>
+      <parameter name="className" value="services.AMSSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="AMS"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="updateTime" qname="operNS:updateTime" xmlns:operNS="http://services" soapAction="" >
+        <parameter qname="pns:u" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:s" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="listflightsCustomer" qname="operNS:listflightsCustomer" xmlns:operNS="http://services" returnQName="retNS:listflightsCustomerReturn" xmlns:retNS="http://services" returnType="rtns:Flightdetails" xmlns:rtns="http://beans" soapAction="" >
+        <parameter qname="pns:sr" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:d" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="deleteEmployee" qname="operNS:deleteEmployee" xmlns:operNS="http://services" returnQName="retNS:deleteEmployeeReturn" xmlns:retNS="http://services" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:email" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="searchEmployee" qname="operNS:searchEmployee" xmlns:operNS="http://services" returnQName="retNS:searchEmployeeReturn" xmlns:retNS="http://services" returnType="rtns:SearchEmployee" xmlns:rtns="http://beans" soapAction="" >
+        <parameter qname="pns:firstname" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:lastname" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:city" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:state" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:position" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:hiredate" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="listreservations" qname="operNS:listreservations" xmlns:operNS="http://services" returnQName="retNS:listreservationsReturn" xmlns:retNS="http://services" returnType="rtns:Journey" xmlns:rtns="http://beans" soapAction="" >
+      </operation>
+      <operation name="listtravellers" qname="operNS:listtravellers" xmlns:operNS="http://services" returnQName="retNS:listtravellersReturn" xmlns:retNS="http://services" returnType="rtns:Traveller" xmlns:rtns="http://beans" soapAction="" >
+      </operation>
+      <operation name="searchtraveller" qname="operNS:searchtraveller" xmlns:operNS="http://services" returnQName="retNS:searchtravellerReturn" xmlns:retNS="http://services" returnType="rtns:SearchTraveller" xmlns:rtns="http://beans" soapAction="" >
+        <parameter qname="pns:fname" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:lname" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:fno" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:dest" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:traveldate" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="deleteOneFlight" qname="operNS:deleteOneFlight" xmlns:operNS="http://services" returnQName="retNS:deleteOneFlightReturn" xmlns:retNS="http://services" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:flightnumber" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="listFlightsToUpdate" qname="operNS:listFlightsToUpdate" xmlns:operNS="http://services" returnQName="retNS:listFlightsToUpdateReturn" xmlns:retNS="http://services" returnType="rtns:Flightdetails" xmlns:rtns="http://beans" soapAction="" >
+        <parameter qname="pns:flightnumber" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:source" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:destination" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="addemployees" qname="operNS:addemployees" xmlns:operNS="http://services" returnQName="retNS:addemployeesReturn" xmlns:retNS="http://services" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:firstname" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:lastname" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:usn" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:ssn" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:type" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:addr" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:city" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:zip" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:state" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:dob" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:workd" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:pos" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:hire" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="listemployees" qname="operNS:listemployees" xmlns:operNS="http://services" returnQName="retNS:listemployeesReturn" xmlns:retNS="http://services" returnType="rtns:Employee" xmlns:rtns="http://beans" soapAction="" >
+      </operation>
+      <operation name="listflights" qname="operNS:listflights" xmlns:operNS="http://services" returnQName="retNS:listflightsReturn" xmlns:retNS="http://services" returnType="rtns:Flightdetails" xmlns:rtns="http://beans" soapAction="" >
+      </operation>
+      <operation name="signup" qname="operNS:signup" xmlns:operNS="http://services" returnQName="retNS:signupReturn" xmlns:retNS="http://services" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:fname" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:lname" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:usn" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:pwd" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:address" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:city" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:state" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:zipcode" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:dob" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:ssn" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:ppn" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:nationality" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="deleteFlight" qname="operNS:deleteFlight" xmlns:operNS="http://services" returnQName="retNS:deleteFlightReturn" xmlns:retNS="http://services" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:fno" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:fname" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:src" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:dest" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:duration" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="addFlight" qname="operNS:addFlight" xmlns:operNS="http://services" returnQName="retNS:addFlightReturn" xmlns:retNS="http://services" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:fno" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:fname" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:src" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:dest" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:crew" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:seats" xmlns:pns="http://services" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:duration" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="updateFlight" qname="operNS:updateFlight" xmlns:operNS="http://services" returnQName="retNS:updateFlightReturn" xmlns:retNS="http://services" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:duration" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:numberofseats" xmlns:pns="http://services" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:crewdetails" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:flightnumber" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="listOneFlight" qname="operNS:listOneFlight" xmlns:operNS="http://services" returnQName="retNS:listOneFlightReturn" xmlns:retNS="http://services" returnType="rtns:Flightdetails" xmlns:rtns="http://beans" soapAction="" >
+        <parameter qname="pns:flightnumber" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="signIn" qname="operNS:signIn" xmlns:operNS="http://services" returnQName="retNS:signInReturn" xmlns:retNS="http://services" returnType="rtns:Person" xmlns:rtns="http://beans" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="updatePinfo" qname="operNS:updatePinfo" xmlns:operNS="http://services" returnQName="retNS:updatePinfoReturn" xmlns:retNS="http://services" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:emailid" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:address" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:city" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:state" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:zipcode" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="retrieveDate" qname="operNS:retrieveDate" xmlns:operNS="http://services" returnQName="retNS:retrieveDateReturn" xmlns:retNS="http://services" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:u" xmlns:pns="http://services" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="retrieveDate searchEmployee listflights updateTime searchtraveller updatePinfo listOneFlight listFlightsToUpdate deleteEmployee listreservations listflightsCustomer listemployees updateFlight listtravellers deleteOneFlight addFlight signIn addemployees deleteFlight signup"/>
+
+      <typeMapping
+        xmlns:ns="http://beans"
+        qname="ns:Flightdetails"
+        type="java:beans.Flightdetails"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://beans"
+        qname="ns:Journey"
+        type="java:beans.Journey"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://beans"
+        qname="ns:SearchTraveller"
+        type="java:beans.SearchTraveller"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://beans"
+        qname="ns:Employee"
+        type="java:beans.Employee"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://beans"
+        qname="ns:Traveller"
+        type="java:beans.Traveller"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://beans"
+        qname="ns:Person"
+        type="java:beans.Person"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://beans"
+        qname="ns:SearchEmployee"
+        type="java:beans.SearchEmployee"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
